@@ -48,6 +48,6 @@ Once the image is built, it will appear in your list of Docker images. To run th
         docker run \
         -v ~/my_input_folder:/input \ # attaching input directory
         -v ~/my_output_folder:/output \ # attaching output directory
-        birdnet:latest owls.wav # refering the file in the input directory
+        birdnet:latest -m birdnet_analyzer.analyze -o /output owls.wav # refering the file in the input directory
 
-By default, the Docker container’s entry point will execute the `python3 -m birdnet.analyzer` module. You can pass additional arguments directly via the Docker `run` command interface as needed.
+Docker container’s entry point is `python3`. You need to add `-m birdnet_analyzer.{module-name}` with the name of the module to start. You can pass additional arguments directly via the Docker `run` command interface as needed.
