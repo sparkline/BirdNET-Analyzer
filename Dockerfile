@@ -18,4 +18,4 @@ RUN pip3 install --no-cache-dir .[${TARGET}]
 WORKDIR /input
 
 # Add entry point to run the script
-ENTRYPOINT [ "python3" , "-m", "birdnet_analyzer.analyze", "-o", "/output"]
+ENTRYPOINT [ "python3" ]
