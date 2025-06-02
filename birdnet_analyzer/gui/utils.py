@@ -1,4 +1,6 @@
 # ruff: noqa: PLW0603
+import base64
+import io
 import multiprocessing
 import os
 import sys
@@ -628,6 +630,26 @@ def species_lists(opened=True):
             selected_classifier_state,
             map_plot,
         )
+
+
+def download_plot(plot, filename=""):
+    from PIL import Image
+
+    imgdata = base64.b64decode(plot.plot.split(",", 1)[1])
+    res = _WINDOW.create_file_dialog(
+        webview.SAVE_DIALOG,
+        file_types=("PNG (*.png)", "Webp (*.webp)", "JPG (*.jpg)"),
+        save_filename=filename,
+    )
+
+    if res:
+        if res.endswith(".webp"):
+            with open(res, "wb") as f:
+                f.write(imgdata)
+        else:
+            output_format = res.rsplit(".", 1)[-1].upper()
+            img = Image.open(io.BytesIO(imgdata))
+            img.save(res, output_format if output_format in ["PNG", "JPEG"] else "PNG")
 
 
 def _get_network_shortcuts():
