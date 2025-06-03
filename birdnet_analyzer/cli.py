@@ -428,6 +428,10 @@ def embeddings_parser():
         help="Path to input file or folder.",
     )
 
+    parser.add_argument(
+        "--file_output",
+    )
+
     return parser
 
 
